@@ -13,7 +13,9 @@ public class Descricao implements CaseComponent{
 	int caseId;
 	String naturezaProblema; 
 
-	//String relator; 
+	String relatorId; 
+
+
 	//String turmaId; 
 	//String cursoId;
 	String poloId;
@@ -24,7 +26,14 @@ public class Descricao implements CaseComponent{
 	//String tipoCaso;
 	
 		
+	public String getRelatorId() {
+		return relatorId;
+	}
 
+
+	public void setRelatorId(String relatorId) {
+		this.relatorId = relatorId;
+	}
 	
 	public Attribute getIdAttribute() {
 		return new Attribute("caseId",this.getClass());

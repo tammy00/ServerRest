@@ -58,6 +58,7 @@ public class Recuperacao {
 			";\n Tema: "+desc.getNaturezaProblema()+
 			//";\n Topico: "+desc.getDateCreated()+
 			";\n Polo (ID): "+desc.getPoloId()+
+			";\n Relator (ID): "+desc.getRelatorId()+
 			//";\n Descricao do proglema: "+desc.getTurmaId()+
 			//";//\n Natureza do problema: "+desc.getCursoId()+
 			//";\n Natureza do problema: "+desc.getDisciplinaId()+
@@ -101,6 +102,7 @@ public class Recuperacao {
 				//caso.setCursoId(desc.getCursoId());
 				//caso.setDisciplinaId(desc.getDisciplinaId());
 				caso.setPoloId(desc.getPoloId());
+				caso.setRelatorId(desc.getRelatorId());
 				caso.setDescricaoProblema(desc.getDescricaoProblema());
 				caso.setProblema(desc.getProblema());
 				caso.setPalavrasChavesProblema(desc.getPalavrasChavesProblema());
@@ -200,12 +202,12 @@ public class Recuperacao {
 	} 
 	
 	
-/*
+
 	
-	public String getRelator(int _caso) {
+	public String getRelatorId(int _caso) {
 		Descricao desc  = getCaseDescription(_caso);
-		return desc.getRelator();
-	}  */
+		return desc.getRelatorId();
+	}  
 /*
 	public String getTurmaId(int _caso) {
 		Descricao desc  = getCaseDescription(_caso);

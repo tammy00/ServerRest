@@ -23,7 +23,8 @@ public class Retencao {
 	List<CBRCase> casos, casosRetidos;
 	int casoBaseSize;
 	
-	public Retencao(Collection<CBRCase> _casos_selecionados, CBRCaseBase _casoBase) {
+	public Retencao(Collection<CBRCase> _casos_selecionados, CBRCaseBase _casoBase) 
+	{
 		casosSelecionados = _casos_selecionados;
 		casos = new ArrayList<CBRCase>(casosSelecionados);
 		//System.out.println(casos);
@@ -119,12 +120,12 @@ public class Retencao {
 	}
 	
 	
-	/*
-	public String getRelator(int _caso) {
+	
+	public String getRelatorId(int _caso) {
 		Descricao desc  = getCaseDescription(_caso);
-		return desc.getRelator();
+		return desc.getRelatorId();
 	}
-
+/*
 	public String getTurmaId(int _case) {
 		Descricao desc  = getCaseDescription(_case);
 		return desc.getTurmaId();

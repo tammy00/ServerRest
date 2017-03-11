@@ -15,11 +15,12 @@ public class QueryConfig {
 	}
 	
 	public void setQuery(String _naturezaProblema, String _polo,
-			String _descricaoProblema, String _problema, String _palavrasChavesProblema) {
+			String _descricaoProblema, String _problema, 
+			String _palavrasChavesProblema, String _relatorId) {
 	    
 		desc.setNaturezaProblema(_naturezaProblema);
 		//desc.setDateCreated(_dateCreated);
-		//desc.setRelator(_relator);
+		desc.setRelatorId(_relatorId);
 		//desc.setTurmaId(_turma);
 		//desc.setCursoId(_curso);
 		//desc.setDisciplinaId(_disciplina);
@@ -36,11 +37,11 @@ public class QueryConfig {
 	public void setQuery(String _naturezaProblema, String _polo,
 			String _descricaoProblema, String _problema, String _palavrasChavesProblema, String _diagnostico,
 			String _solucao, String _palavrasChavesSolucao,String _acaoImplementada,String _efetividade,
-			String _custos, String _atoresEnvolvidos) {
+			String _custos, String _atoresEnvolvidos, String _relatorId) {
 	    
 		desc.setNaturezaProblema(_naturezaProblema);
 		//desc.setDateCreated(_dateCreated);
-		//desc.setRelator(_relator);
+		desc.setRelatorId(_relatorId);
 		//desc.setTurmaId(_turma);
 		//desc.setCursoId(_curso);
 		//desc.setDisciplinaId(_disciplina);

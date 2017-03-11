@@ -97,7 +97,7 @@ public class Revisao {
 			
 			    salvarCaso(0,desc2.getCaseId(),
 			    		desc.getNaturezaProblema(),						
-						//desc.getRelator(),
+						desc.getRelatorId(),
 						//desc.getTurmaId(),
 						//desc.getCursoId(),
 						//desc.getDisciplinaId(),
@@ -185,7 +185,7 @@ public class Revisao {
 			    salvarCaso(0,desc2.getCaseId(),
 			    		desc.getNaturezaProblema(),
 						//desc.getDateCreated(),
-						//desc.getRelator(),
+						desc.getRelatorId(),
 						//desc.getTurmaId(),
 						//desc.getCursoId(),
 						//desc.getDisciplinaId(),
@@ -222,13 +222,14 @@ public class Revisao {
 					//";\n Topico: "+desc.getDateCreated()+
 					//";\n Estilo de Aprendizagem: "+desc.getRelator()+
 					";\n Polo (ID): "+desc.getPoloId()+
+					";\n Relator (ID): "+desc.getRelatorId()+
 					//";\n Descricao do proglema: "+desc.getTurmaId()+
 					//";\n Natureza do problema: "+desc.getCursoId()+
 					//";\n Natureza do problema: "+desc.getDisciplinaId()+
 					//";\n Natureza do problema: "+desc.getQtdeAlunos()+
-					";\n Natureza do problema: "+desc.getDescricaoProblema()+
-					";\n Natureza do problema: "+desc.getProblema()+
-					";\n Natureza do problema: "+desc.getPalavrasChavesProblema()+			
+					";\n Descrição do problema: "+desc.getDescricaoProblema()+
+					";\n Problema detalhado: "+desc.getProblema()+
+					";\n Keywords: "+desc.getPalavrasChavesProblema()+			
 					" \n \n  ------ Solucao Empregada ------- \n"+
 					//"\nDiagnostico: "+sol.getDiagnostico()+
 					"\n"+"Solucao: "+sol.getSolucao()+
@@ -246,8 +247,8 @@ public class Revisao {
 	
 	
 		
-	public void salvarCaso(int _caseNumber,int _caseId, String _naturezaProblema,  String _polo,
-			String _descricaoProblema, String _problema, String _solucao, 
+	public void salvarCaso(int _caseNumber,int _caseId, String _naturezaProblema, String _relatorId, 
+			String _polo, String _descricaoProblema, String _problema, String _solucao, 
 			String _palavrasChavesSolucao, String _acaoImplementada, String _efetividade, 
 			String _custos, String _atoresEnvolvidos) {
 			
@@ -259,7 +260,7 @@ public class Revisao {
 			desc.setCaseId(_caseId);
 			desc.setNaturezaProblema(_naturezaProblema);
 			//desc.setDateCreated(_dateCreated);
-			//desc.setRelator(_relator);
+			desc.setRelatorId(_relatorId);
 			desc.setPoloId(_polo);
 			//desc.setTurmaId(_turma);
 			//desc.setCursoId(_curso);
@@ -333,12 +334,12 @@ public class Revisao {
 		Descricao desc  = getCaseDescription(_caso);
 		return desc.getNaturezaProblema();
 	}
-	/*
-	public String getRelator(int _caso) {
-		Descricao desc  = getCaseDescription(_caso);
-		return desc.getRelator();
-	}
 	
+	public String getRelatorId(int _caso) {
+		Descricao desc  = getCaseDescription(_caso);
+		return desc.getRelatorId();
+	}
+	/*
 	public String getTurmaId(int _case) {
 		Descricao desc  = getCaseDescription(_case);
 		return desc.getTurmaId();

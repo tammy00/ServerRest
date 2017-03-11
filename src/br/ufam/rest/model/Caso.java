@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Caso {
 	int caseId;
 	String naturezaProblema; 	
-	//String relator; 
+	String relatorId; 
 	//String cursoId;
 	//String disciplinaId;
 	String poloId;
@@ -85,13 +85,13 @@ public class Caso {
 	public void setNaturezaProblema(String naturezaProblema) {
 		this.naturezaProblema = naturezaProblema;
 	}
-	/*
-	public String getRelator() {
-		return relator;
+	
+	public String getRelatorId() {
+		return relatorId;
 	}
-	public void setRelator(String relator) {
-		this.relator = relator;
-	}  */
+	public void setRelatorId(String relatorId) {
+		this.relatorId = relatorId;
+	}  
 	
 	public String getDescricaoProblema() {
 		return descricaoProblema;

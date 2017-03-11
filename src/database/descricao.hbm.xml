@@ -5,6 +5,7 @@
 		<id name="caseId" column="id"></id>
 		<property name="naturezaProblema" column="natureza_problema" />	
 		<property name="poloId" column="id_polo" />			
+		<property name="relatorId" column="id_relator" />	
 		<property name="descricaoProblema" column="descricao_problema" />
 		<property name="problema" column="problema_detalhado" />
 		<property name="palavrasChavesProblema" column="palavras_chaves" />

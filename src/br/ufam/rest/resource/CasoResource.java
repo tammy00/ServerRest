@@ -231,7 +231,7 @@ public class CasoResource implements StandardCBRApplication{
 				  String naturezaProblema = caso.getNaturezaProblema();
 				  Date dataCriacao = new Date(0);
 				  String dateCreated = dataCriacao.toString();
-				  //String relator = caso.getRelator();
+				  String relator = caso.getRelatorId();
 				  String polo = caso.getPoloId();
 				  String descricaoProblema = caso.getDescricaoProblema();
 				  String problema = caso.getProblema();
@@ -246,9 +246,8 @@ public class CasoResource implements StandardCBRApplication{
 				  solucao.setAtoresEnvolvidos(caso.getAtoresEnvolvidos());
 		 			  
 				
-				//Parametros=>Tema, Topico, Estilo de Aprendizagem, DescricaoProblema, NaturezaProblema
 				  System.out.println("Novo Caso: "+naturezaProblema+";"+dateCreated+";"+polo+";"
-						  +descricaoProblema+";"+problema+";"+ palavrasChavesProblema+";"
+						  +relator+";"+descricaoProblema+";"+problema+";"+ palavrasChavesProblema+";"
 						  +solucao.getSolucao()+";"+solucao.getAcaoImplementada()+";"
 						  +solucao.getEfetividade()+";"+solucao.getCustos()+";"+solucao.getAtoresEnvolvidos()+".");
 				  
@@ -332,7 +331,7 @@ public class CasoResource implements StandardCBRApplication{
 				String naturezaProblema = caso.getNaturezaProblema();
 				//Date dataCriacao = new Date(0);
 				//String dateCreated = dataCriacao.toString();
-				//String relator = caso.getRelator();				
+				String relatorId = caso.getRelatorId();				
 				//String cursoId = caso.getCursoId();
 				String poloId = caso.getPoloId();
 				//String disciplinaId = caso.getDisciplinaId();
@@ -342,11 +341,11 @@ public class CasoResource implements StandardCBRApplication{
 				 			  
 				
 				//Parametros=>Tema, Topico, Estilo de Aprendizagem, DescricaoProblema, NaturezaProblema
-				  System.out.println("Novo Caso: "+naturezaProblema+";"+poloId+";"
+				  System.out.println("Novo Caso: "+naturezaProblema+";"+poloId+";"+relatorId+";"
 						  +descricaoProblema+";"+problema+";"+ palavrasChavesProblema);
 				  
 				//qf.setQuery(tema,topico,estiloDeAprendizagem,descricaoDoProblema,naturezaDoProblema);
-				qf.setQuery(naturezaProblema,poloId,descricaoProblema,problema,palavrasChavesProblema);
+				qf.setQuery(naturezaProblema,poloId,descricaoProblema,problema,palavrasChavesProblema, relatorId);
 				CBRQuery query = qf.getQuery();		
 				
 				casoRecuperado = gerenciadorRBC.recupera(query);

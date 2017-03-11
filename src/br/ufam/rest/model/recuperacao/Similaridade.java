@@ -25,10 +25,10 @@ public class Similaridade {
 	private void configure() {
 		//configuração dos atributos e os pesos de cada atributo
 		setAttributeConfig("naturezaProblema", new Double(3)); 
-		//setAttributeConfig("relator", new Double(2));	
 		//setAttributeConfig("cursoId", new Double(1));
 		//setAttributeConfig("disciplinaId", new Double(1));
-		setAttributeConfig("poloId", new Double(2));	
+		setAttributeConfig("poloId", new Double(2));
+		setAttributeConfig("relatorId", new Double(2));	
 		setAttributeConfig("descricaoProblema", new Double(1));
 		setAttributeConfig("problema", new Double(3));
 		setAttributeConfig("palavrasChavesProblema", new Double(2));
