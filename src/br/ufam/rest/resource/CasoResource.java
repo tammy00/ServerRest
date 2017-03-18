@@ -1,9 +1,12 @@
 package br.ufam.rest.resource;
 
 import java.sql.Date;
+
+import jade.core.Agent;
+import jade.core.AID;
+
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.regex.Pattern;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -17,9 +20,7 @@ import br.ufam.rest.model.recuperacao.QueryConfig;
 import br.ufam.rest.model.recuperacao.Recuperacao;
 import br.ufam.rest.model.recuperacao.Similaridade;
 import br.ufam.rest.model.retencao.Retencao;
-import br.ufam.rest.model.reutilizacao.Reutilizacao;
 import br.ufam.rest.model.revisao.Revisao;
-
 import jcolibri.casebase.LinealCaseBase;
 import jcolibri.cbraplications.StandardCBRApplication;
 import jcolibri.cbrcore.CBRCase;
@@ -36,13 +37,24 @@ import jcolibri.util.FileIO;
 
 
 @Path("/ServerRBC")
-public class CasoResource implements StandardCBRApplication{
+public class CasoResource extends Agent implements StandardCBRApplication{
 	static private CasoResource _instance = null;
 	private Connector _connector;
 	private static CBRCaseBase _caseBase;
 	
 	public CasoResource(){
 		
+	}
+	
+	protected void setup() {
+        //  Printout a welcome message
+		System.out.println("Hello! CBR Agent "+getAID().getName()+" is ready.");
+	}
+	
+	protected void takeDown() 
+	{
+		// Printout a dismissal message
+		System.out.println("CBR Agent "+getAID().getName()+" terminating.");
 	}
 	
 	public static CasoResource getInstance() {
@@ -290,27 +302,7 @@ public class CasoResource implements StandardCBRApplication{
 			Caso caso = recuperar.exibirCasosRecuperado2();			
 			
 			return caso;
-			/*
-			//Etapa de Reutilização ou adaptação
-			Reutilizacao reutilizar = new Reutilizacao(query,casoSelecionado);
-			
-			//Executa a adaptação do novo caso para usar a solução do caso passado
-			reutilizar.executaAdapatacaoDoCaso();
-						
-			//Etapa de revisão
-			Revisao revisao = new Revisao(casoSelecionado,query);
-			//Executa o processo de revisão
-			revisao.executarRevisao();
-			
-			//Etapa de retenção 
-			Retencao reter = new Retencao(casoSelecionado,_caseBase);
-				
-			double similaridade = recuperar.getSimilaridade(0);
-			if (similaridade < 1.0){
-				//Reter o Caso na base de casos
-				reter.addCasoRetido(0);	//adiciona o novo caso na lista de casos para serem salvos na base de casos
-				reter.learn(); // salva o novo caso na base de casos
-			}*/
+
 		}
 		
 		// Recupera o caso mais similar, relacionado a action searchPost.php
