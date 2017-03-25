@@ -66,6 +66,7 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 	public void configure() throws ExecutionException {
 			
 			try{
+				setup();  // Pode dar erro aqui - criando agente
 				System.out.println("Antes DataBaseConnector");
 				_connector = new DataBaseConnector();
 				System.out.println("Antes ler xml");
@@ -346,6 +347,7 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 			}catch(Exception e) {
 				org.apache.commons.logging.LogFactory.getLog(CasoResource.class).error(e);
 			}
+			doDelete();  // Matando o agente
 			
 			return casoRecuperado;
 
