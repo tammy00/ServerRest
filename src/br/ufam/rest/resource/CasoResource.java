@@ -3,7 +3,9 @@ package br.ufam.rest.resource;
 import java.sql.Date;
 
 import jade.core.Agent;
+
 import jade.core.AID;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -36,11 +38,13 @@ import jcolibri.method.retrieve.selection.SelectCases;
 import jcolibri.util.FileIO;
 
 
-@Path("/ServerRBC")
+@Path("/ServerRest")
 public class CasoResource extends Agent implements StandardCBRApplication{
 	static private CasoResource _instance = null;
 	private Connector _connector;
 	private static CBRCaseBase _caseBase;
+	
+	
 	
 	public CasoResource(){
 		
@@ -49,13 +53,13 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 	protected void setup() {
         //  Printout a welcome message
 		System.out.println("Hello! CBR Agent "+getAID().getName()+" is ready.");
-	}
+	}  
 	
 	protected void takeDown() 
 	{
 		// Printout a dismissal message
 		System.out.println("CBR Agent "+getAID().getName()+" terminating.");
-	}
+	}     
 	
 	public static CasoResource getInstance() {
 		if(_instance == null)
@@ -104,28 +108,6 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 			//Mostrar na tela o caso mais similar recuperado
 			recuperar.exibirCasosRecuperado();
 			
-			
-			/*
-			//Etapa de Reutilização ou adaptação
-			Reutilizacao reutilizar = new Reutilizacao(query,casoSelecionado);
-			
-			//Executa a adaptação do novo caso para usar a solução do caso passado
-			reutilizar.executaAdapatacaoDoCaso();
-						
-			//Etapa de revisão
-			Revisao revisao = new Revisao(casoSelecionado,query);
-			//Executa o processo de revisão
-			revisao.executarRevisao();
-			
-			//Etapa de retenção 
-			Retencao reter = new Retencao(casoSelecionado,_caseBase);
-				
-			double similaridade = recuperar.getSimilaridade(0);
-			if (similaridade < 1.0){
-				//Reter o Caso na base de casos
-				reter.addCasoRetido(0);	//adiciona o novo caso na lista de casos para serem salvos na base de casos
-				reter.learn(); // salva o novo caso na base de casos
-			}*/
 		}
 		
 		
@@ -137,47 +119,6 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 			return _caseBase;			
 		}
 		
-		
-		@GET
-		@Path("/casos")
-		@Produces("application/json")
-		public ArrayList<Caso> listarcasos() throws ExecutionException{
-			System.out.println("GET Todos os Casos");
-			CasoResource gerenciadorRBC = CasoResource.getInstance();
-			gerenciadorRBC.configure();
-			gerenciadorRBC.preCycle();
-			Collection<CBRCase> cases = _caseBase.getCases();
-			ArrayList<Caso> casos = new ArrayList<Caso>();		    
-			for(CBRCase c: cases){
-				Caso caso = new Caso();
-				System.out.println("PARTE II - Descricao Contidos na Base: "+c.getID());
-				System.out.println();
-				
-				//String casoDes = c.getDescription().toString();
-				//String casosString[] = casoDes.split(Pattern.quote(";"));
-				//String caseID = null;
-				//String palavras = null;
-			/*	if (casosString!=null){
-					caseID =  casosString[0];
-					String[] casoID = caseID.split(Pattern.quote("("));					
-					caso.setCaseId(Integer.parseInt(casoID[1]));
-					caso.setNaturezaProblema(casosString[1]);
-					//caso.setDateCreated(casosString[2]); 
-					caso.setRelator(casosString[3]); 
-					caso.setDescricaoProblema(casosString[4]);
-					caso.setProblema(casosString[5]);
-					palavras =  casosString[6];
-					String[] palavrasChaves = palavras.split(Pattern.quote(")"));
-					caso.setPalavrasChavesProblema(palavrasChaves[0]);	
-					
-				}*/
-				casos.add(caso);
-			}	
-			gerenciadorRBC.postCycle();
-			return casos;	
-		}
-		
-
 		//É usado pelo método: adicionaCaso
 		public void adicionarCasoDataBase(CBRQuery query, Solucao solucao) throws ExecutionException {		
 			Similaridade sim = new Similaridade();
@@ -223,60 +164,6 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 			System.out.println("\n\n *****************Retencao reter.learn******************* \n\n");
 			reter.learn(); // salva o novo caso na base de casos
 			//}
-		}
-		
-		
-		
-		
-		@POST
-		@Path("/casos")
-		@Produces("application/json")
-		@Consumes("application/json")
-		public String adicionarCaso(Caso caso) throws ExecutionException {
-			System.out.println("POST Adicionar Caso");
-			CasoResource gerenciadorRBC = CasoResource.getInstance();
-			try {
-				gerenciadorRBC.configure();
-				gerenciadorRBC.preCycle();
-				
-				QueryConfig qf = new QueryConfig();
-				
-				  String naturezaProblema = caso.getNaturezaProblema();
-				  Date dataCriacao = new Date(0);
-				  String dateCreated = dataCriacao.toString();
-				  String relator = caso.getRelatorId();
-				  String polo = caso.getPoloId();
-				  String descricaoProblema = caso.getDescricaoProblema();
-				  String problema = caso.getProblema();
-				  String palavrasChavesProblema = caso.getPalavrasChavesProblema();
-				  Solucao solucao = new Solucao();
-				  //solucao.setDiagnostico(caso.getDiagnostico());
-				  solucao.setSolucao(caso.getSolucao());
-				  //solucao.setPalavrasChavesSolucao(caso.getPalavrasChavesSolucao());
-				  solucao.setAcaoImplementada(caso.getAcaoImplementada());
-				  solucao.setEfetividade(caso.getEfetividade()); 
-				  solucao.setCustos(caso.getCustos());
-				  solucao.setAtoresEnvolvidos(caso.getAtoresEnvolvidos());
-		 			  
-				
-				  System.out.println("Novo Caso: "+naturezaProblema+";"+dateCreated+";"+polo+";"
-						  +relator+";"+descricaoProblema+";"+problema+";"+ palavrasChavesProblema+";"
-						  +solucao.getSolucao()+";"+solucao.getAcaoImplementada()+";"
-						  +solucao.getEfetividade()+";"+solucao.getCustos()+";"+solucao.getAtoresEnvolvidos()+".");
-				  
-				//qf.setQuery(tema,topico,estiloDeAprendizagem,descricaoDoProblema,naturezaDoProblema);
-				//qf.setQuery(naturezaProblema,dateCreated,relator,descricaoProblema,problema,palavrasChavesProblema);
-				
-				
-				CBRQuery query = qf.getQuery();		
-				
-				gerenciadorRBC.adicionarCasoDataBase(query,solucao);
-						
-				gerenciadorRBC.postCycle();
-			}catch(Exception e) {
-				org.apache.commons.logging.LogFactory.getLog(CasoResource.class).error(e);
-			}			
-			return caso.getNaturezaProblema() + " adicionado.";
 		}
 		
 		

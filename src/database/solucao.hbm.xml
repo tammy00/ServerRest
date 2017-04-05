@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping default-lazy="false">
 	<class name="br.ufam.rest.model.Solucao" table="solucao">
-		<id name="solucaoId" column="id"></id>
+		<id name="solucaoId" column="id_solucao"></id>
 		<property name="solucao" column="solucao" />
 		<property name="palavrasChavesSolucao" column="palavras_chaves" />		
 		<property name="acaoImplementada" column="acao_implementada" />
