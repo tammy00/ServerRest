@@ -44,21 +44,24 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 	private Connector _connector;
 	private static CBRCaseBase _caseBase;
 	
+	//AID id_apelido = new AID("iLMS", AID.ISLOCALNAME);
 	
 	
 	public CasoResource(){
 		
 	}
 	
-	protected void setup() {
+	public void setup() {
+		
         //  Printout a welcome message
-		System.out.println("Hello! CBR Agent "+getAID().getName()+" is ready.");
+		//System.out.println("Hello! CBR Agent "+id_apelido.getName()+" is ready.");
+		System.out.println("Hello! CBR Agent is ready.");
 	}  
 	
-	protected void takeDown() 
+	public void takeDown() 
 	{
 		// Printout a dismissal message
-		System.out.println("CBR Agent "+getAID().getName()+" terminating.");
+		System.out.println("CBR Agent terminating.");
 	}     
 	
 	public static CasoResource getInstance() {
@@ -202,7 +205,9 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 		public Caso recuperarCaso(Caso caso) {
 			System.out.println("POST Recuperar Caso");
 			CasoResource gerenciadorRBC = CasoResource.getInstance();
+			System.out.println("Instância CaseResource");
 			Caso casoRecuperado = new Caso();
+			System.out.println("Instância Novo Caso");
 			try {
 				gerenciadorRBC.configure();
 				gerenciadorRBC.preCycle();
@@ -231,10 +236,13 @@ public class CasoResource extends Agent implements StandardCBRApplication{
 				casoRecuperado = gerenciadorRBC.recupera(query);
 						
 				gerenciadorRBC.postCycle();
-			}catch(Exception e) {
+				//doDelete();  // Matando o agente
+				takeDown();   //  Código acima dá erro - motivo? Sei lá.
+			}
+			catch(Exception e) 
+			{
 				org.apache.commons.logging.LogFactory.getLog(CasoResource.class).error(e);
 			}
-			doDelete();  // Matando o agente
 			
 			return casoRecuperado;
 
